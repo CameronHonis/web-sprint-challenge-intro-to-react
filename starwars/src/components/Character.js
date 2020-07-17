@@ -4,10 +4,9 @@ import gsap from 'gsap'
 
 const CharDiv = style.div`
     width: 16vw;
-    height: 35vh;
     margin-bottom: 3%;
     margin-right: 2%;
-    padding: 3% 0;
+    padding: 1% 0;
     background: rgba(255,255,255,.7);
     display: flex;
     flex-direction: column;
@@ -16,6 +15,7 @@ const CharDiv = style.div`
 
     div{
         width: 80%;
+        margin-left: 10%;
         height: 2px;
         background: rgba(0,0,0,1);
     }
@@ -27,12 +27,11 @@ const CharDiv = style.div`
 const Character = (props) => {
     let charDiv;
     useEffect(() => {
-        gsap.from(charDiv,{y: -50, delay: props.key*50})
+        gsap.from(charDiv,{y: -50, delay: props.kkey*.05})
     },[])
     return(
         <CharDiv ref={div => charDiv = div}>
-            {/*<h2>{() => props.data.name.length > 12 ? props.data.name.strsub(0,12)+'...' : props.data.name}</h2>*/}
-            <h2>{props.data.name}</h2>
+            <h2>{props.data.name.length > 12 ? props.data.name.substr(0,12)+'...' : props.data.name}</h2>
             <div></div>
             <p>height: {props.data.height}</p>
             <p>mass: {props.data.mass}</p>

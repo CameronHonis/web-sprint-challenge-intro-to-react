@@ -18,18 +18,12 @@ const App = () => {
     const [planets,setPlanets] = useState([])
     const formatChars = () => {
         console.log('a')
-        if (!chars || chars.length === 0){return}
+        if (chars.length === 0){return}
         console.log(chars)
-        let a = chars.map(v => {
-            if (planets){
-                v.planet = planets[Number(v.homeworld.substr(v.homeworld.length-2,1))-1].name
-            }
-            console.log(v)
-            return v
-        })
-        console.log(a)
         setChar(chars.map(v => {
             if (planets){
+                console.log(Number(v.homeworld.substr(v.homeworld.length-2,1))-1)
+                console.log(planets[Number(v.homeworld.substr(v.homeworld.length-2,1))-1])
                 v.planet = planets[Number(v.homeworld.substr(v.homeworld.length-2,1))-1].name
             }
             console.log(v)
@@ -40,7 +34,7 @@ const App = () => {
         axios.get(`https://swapi.dev/api/people/`)
             .then(apiChars => {
                 setChar(CleanUp(apiChars.data.results))
-                formatChars() //in case chars is the last api to load in
+                formatChars()//in case chars is the last api to load in
             })
             .catch(() => {
                 debugger
@@ -54,7 +48,7 @@ const App = () => {
             })
     },[])
     useEffect(() => {
-        setTimeout(() => formatChars(),1000)
+        formatChars()
     },[planets])
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
@@ -67,7 +61,7 @@ const App = () => {
     <div className="App">
       <h1 className="Header">Characters</h1>
       <FlexDiv className='Body'>
-        {chars.map(v => <Character data={v} key={charsKey++}></Character>)}
+        {chars.map(v => <Character data={v} kkey={charsKey++}></Character>)}
       </FlexDiv>
     </div>
     
